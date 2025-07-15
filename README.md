@@ -1,5 +1,7 @@
 # E-commerce Order Management Bot
 
+![Automated Order System](assets/AutomatedOrderSystem.png)
+
 An AI-driven e-commerce order management bot with integrated website showcasing automated customer service capabilities powered by Groq's Llama-3.3-70b-versatile model.
 
 ## Features
