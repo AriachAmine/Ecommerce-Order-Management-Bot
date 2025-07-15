@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Commerce - AI-Powered E-commerce</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>Quantum Commerce</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="/products" class="nav-link">Products</a></li>
+                <li><a href="/account" class="nav-link">Account</a></li>
+                <li><a href="#" class="nav-link" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to the Future of Commerce</h1>
+                <p class="hero-subtitle">Experience AI-powered shopping with quantum-enhanced products and intelligent
+                    order management.</p>
+                <div class="hero-buttons">
+                    <a href="/products" class="btn btn-primary">Explore Products</a>
+                    <button class="btn btn-secondary" onclick="openChatbot()">
+                        <i class="fas fa-robot"></i> Chat with AI Assistant
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-elements">
+                    <div class="element element-1"></div>
+                    <div class="element element-2"></div>
+                    <div class="element element-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">AI-Powered Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Intelligent Order Management</h3>
+                    <p>AI assistant handles order status, returns, and shipping inquiries with natural language
+                        understanding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Real-time Tracking</h3>
+                    <p>Get instant updates on your orders with automated shipping notifications and delivery estimates.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Smart Returns</h3>
+                    <p>Effortless return and exchange process guided by AI to ensure customer satisfaction.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Inventory Intelligence</h3>
+                    <p>Real-time stock monitoring with predictive restocking and availability notifications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Featured Quantum Products</h2>
+            <div class="products-grid" id="featured-products">
+                <!-- Products will be loaded dynamically -->
+            </div>
+            <div class="text-center">
+                <a href="/products" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-widget">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+            <div class="chatbot-header-actions">
+                <button class="chatbot-clear" onclick="clearChatbot()" title="Clear Chat">
+                    <i class="fas fa-broom"></i>
+                </button>
+                <button class="chatbot-close" onclick="closeChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Hello! I'm your AI assistant for order management. I can help with:
+                    <ul>
+                        <li>Order status inquiries</li>
+                        <li>Return and exchange requests</li>
+                        <li>Shipping information</li>
+                        <li>Product availability</li>
+                    </ul>
+                    How can I assist you today?
+                </div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input-field" placeholder="Type your message..."
+                onkeypress="handleChatbotEnter(event)">
+            <button onclick="sendChatbotMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quantum Commerce</h4>
+                    <p>AI-powered e-commerce with quantum-enhanced products and intelligent order management.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>AI Order Management</li>
+                        <li>Smart Returns</li>
+                        <li>Real-time Tracking</li>
+                        <li>Inventory Intelligence</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li>Natural Language Processing</li>
+                        <li>Machine Learning</li>
+                        <li>Quantum Computing</li>
+                        <li>AI Automation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Quantum Commerce. All rights reserved. | Portfolio Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Shopping Cart</h3>
+                <button class="modal-close" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <strong>Total: $<span id="cart-total">0.00</span></strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+                <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/chatbot.js"></script>
+    <script src="/js/cart.js"></script>
+</body>
+
+</html>

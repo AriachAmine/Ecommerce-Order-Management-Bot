@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Quantum Commerce</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>Quantum Commerce</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/products" class="nav-link">Products</a></li>
+                <li><a href="/account" class="nav-link active">Account</a></li>
+                <li><a href="#" class="nav-link" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Account Header -->
+    <section class="account-header">
+        <div class="container">
+            <h1 class="page-title">Account Dashboard</h1>
+            <p class="page-subtitle">Manage your profile and track your quantum orders</p>
+        </div>
+    </section>
+
+    <!-- Login Section (shown if not logged in) -->
+    <section id="login-section" class="login-section">
+        <div class="container">
+            <div class="login-card">
+                <h2>Welcome to Quantum Commerce</h2>
+                <p>Sign in to track your orders and manage your account</p>
+
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showLoginForm()">Sign In</button>
+                    <button class="auth-tab" onclick="showRegisterForm()">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" required placeholder="Enter your email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                    <p class="auth-note">
+                        For demo purposes, enter any email to continue. No password required.
+                    </p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <input type="email" id="register-email" required placeholder="Enter your email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Register
+                    </button>
+                    <p class="auth-note">
+                        Create a demo account to explore our AI-powered order management.
+                    </p>
+                </form>
+
+                <!-- Demo Account Button -->
+                <div class="demo-account">
+                    <button class="btn btn-secondary" onclick="loginAsDemoUser()">
+                        <i class="fas fa-play"></i>
+                        Continue as Demo User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Dashboard (shown if logged in) -->
+    <section id="dashboard-section" class="dashboard-section" style="display: none;">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- User Profile Card -->
+                <div class="dashboard-card profile-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user"></i> Profile Information</h3>
+                        <button class="btn btn-secondary btn-small" onclick="editProfile()">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="profile-details">
+                                <h4 id="user-name">Demo User</h4>
+                                <p id="user-email">demo@example.com</p>
+                                <p class="user-since">Member since <span id="member-since">2025</span></p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Order Statistics -->
+                <div class="dashboard-card stats-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> Order Statistics</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number" id="total-orders">0</div>
+                                <div class="stat-label">Total Orders</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="pending-orders">0</div>
+                                <div class="stat-label">Pending</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="delivered-orders">0</div>
+                                <div class="stat-label">Delivered</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">$<span id="total-spent">0.00</span></div>
+                                <div class="stat-label">Total Spent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Assistant Quick Actions -->
+                <div class="dashboard-card ai-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Get instant help with your orders and account</p>
+                        <div class="ai-actions">
+                            <button class="btn btn-primary btn-small" onclick="askAI('Check my order status')">
+                                <i class="fas fa-search"></i>
+                                Check Orders
+                            </button>
+                            <button class="btn btn-primary btn-small" onclick="askAI('I want to return an item')">
+                                <i class="fas fa-undo"></i>
+                                Start Return
+                            </button>
+                            <button class="btn btn-primary btn-small" onclick="openChatbot()">
+                                <i class="fas fa-comments"></i>
+                                Open Chat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order History -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Order History</h2>
+                    <button class="btn btn-secondary" onclick="createTestOrder()">
+                        <i class="fas fa-plus"></i>
+                        Create Test Order
+                    </button>
+                </div>
+
+                <div id="orders-container" class="orders-container">
+                    <!-- Orders will be loaded here -->
+                </div>
+
+                <div id="no-orders" class="no-orders">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>No orders yet</h3>
+                    <p>Start shopping to see your orders here</p>
+                    <a href="/products" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Browse Products
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Detail Modal -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content order-modal-content">
+            <div class="modal-header">
+                <h3 id="modal-order-title">Order Details</h3>
+                <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-detail-content" id="order-detail-content">
+                    <!-- Order details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeOrderModal()">Close</button>
+                <button class="btn btn-primary" id="order-action-btn" onclick="orderAction()">
+                    <i class="fas fa-robot"></i>
+                    Ask AI About This Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-widget">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+            <div class="chatbot-header-actions">
+                <button class="chatbot-clear" onclick="clearChatbot()" title="Clear Chat">
+                    <i class="fas fa-broom"></i>
+                </button>
+                <button class="chatbot-close" onclick="closeChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Hello! I can help you with your account and orders. I can assist with:
+                    <ul>
+                        <li>Order status and tracking</li>
+                        <li>Return and exchange requests</li>
+                        <li>Account information</li>
+                        <li>Product recommendations</li>
+                    </ul>
+                    What would you like to know?
+                </div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input-field" placeholder="Ask about your account..."
+                onkeypress="handleChatbotEnter(event)">
+            <button onclick="sendChatbotMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Shopping Cart</h3>
+                <button class="modal-close" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <strong>Total: $<span id="cart-total">0.00</span></strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+                <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quantum Commerce</h4>
+                    <p>AI-powered e-commerce with quantum-enhanced products and intelligent order management.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li>Order Tracking</li>
+                        <li>Return Management</li>
+                        <li>Profile Settings</li>
+                        <li>AI Assistant</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li>24/7 AI Support</li>
+                        <li>Order Help</li>
+                        <li>Technical Issues</li>
+                        <li>Feedback</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Quantum Commerce. All rights reserved. | Portfolio Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/chatbot.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/account.js"></script>
+</body>
+
+</html>
