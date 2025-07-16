@@ -66,6 +66,7 @@ class QuantumChatbot {
         
         if (widget && toggle) {
             widget.classList.remove('open');
+            toggle.style.display = 'inline-block';
             this.isOpen = false;
         }
     }
